@@ -73,12 +73,6 @@ WSGI_APPLICATION = "svs.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-print("Connecting to PostgreSQL database...")
-print("POSTGRES_DB:", os.getenv("POSTGRES_DB"))
-print("POSTGRES_USER:", os.getenv("POSTGRES_USER"))
-print("POSTGRES_PASSWORD:", os.getenv("POSTGRES_PASSWORD"))
-print("POSTGRES_HOST:", os.getenv("POSTGRES_HOST"))
-print("POSTGRES_PORT:", os.getenv("POSTGRES_PORT"))
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
