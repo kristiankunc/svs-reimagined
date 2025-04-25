@@ -3,3 +3,6 @@ django-tailwind
 django-tailwind[reload]
 psycopg[binary]
 python-dotenv
+ruff
+djlint
+pre-commit

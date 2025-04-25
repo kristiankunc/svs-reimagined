@@ -1,0 +1,10 @@
+{
+	"python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+	"editor.formatOnSave": true,
+	"[python]": {
+		"editor.defaultFormatter": "charliermarsh.ruff"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "monosans.djlint"
+	}
+}

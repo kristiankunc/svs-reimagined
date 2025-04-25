@@ -1,0 +1,30 @@
+[tool.ruff]
+line-length = 120
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".github",
+    ".hg",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "build",
+    "dist",
+    "migrations",
+    "node_modules",
+    "static",
+]
+
+target-version = "py313"
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.djlint]
+indent = 4
+profile = "django"

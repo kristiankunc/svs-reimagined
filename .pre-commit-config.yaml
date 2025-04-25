@@ -1,0 +1,12 @@
+repos:
+    - repo: https://github.com/astral-sh/ruff-pre-commit
+      rev: v0.11.7
+      hooks:
+          - id: ruff
+            args: [--fix]
+
+    - repo: https://github.com/Riverside-Healthcare/djlint
+      rev: v1.36.4
+      hooks:
+          - id: djlint
+            args: [--reformat]
