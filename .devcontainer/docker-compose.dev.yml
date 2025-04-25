@@ -1,0 +1,22 @@
+services:
+    postgres:
+        image: postgres:latest
+        container_name: postgres
+        env_file:
+            - ../.env
+        ports:
+            - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: phpmyadmin
+        environment:
+            PMA_HOST: postgres
+            PMA_PORT: ${POSTGRES_PORT}
+        ports:
+            - "8080:80"
+
+volumes:
+  postgres_data:
