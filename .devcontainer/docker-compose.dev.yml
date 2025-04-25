@@ -9,14 +9,13 @@ services:
         volumes:
             - postgres_data:/var/lib/postgresql/data
 
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin:latest
-        container_name: phpmyadmin
-        environment:
-            PMA_HOST: postgres
-            PMA_PORT: ${POSTGRES_PORT}
+    adminer:
+        image: adminer:latest
+        container_name: adminer
+        environment:            
+            ADMINER_DEFAULT_SERVER: postgres
         ports:
-            - "8080:80"
+            - "8080:8080"
 
 volumes:
   postgres_data:

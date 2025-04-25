@@ -1,3 +1,4 @@
+import os
 from shutil import which
 
 
@@ -6,6 +7,10 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+if os.path.exists(os.path.join(BASE_DIR, ".env")):
+    from dotenv import load_dotenv
+
+    load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -68,10 +73,20 @@ WSGI_APPLICATION = "svs.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+print("Connecting to PostgreSQL database...")
+print("POSTGRES_DB:", os.getenv("POSTGRES_DB"))
+print("POSTGRES_USER:", os.getenv("POSTGRES_USER"))
+print("POSTGRES_PASSWORD:", os.getenv("POSTGRES_PASSWORD"))
+print("POSTGRES_HOST:", os.getenv("POSTGRES_HOST"))
+print("POSTGRES_PORT:", os.getenv("POSTGRES_PORT"))
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("POSTGRES_HOST"),
+        "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
 
