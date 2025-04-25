@@ -4,6 +4,8 @@
 # It will also ensure that both processes are terminated when the script exits.
 trap "kill 0" EXIT
 
+# run on port 8001
+mkdocs serve -f docs/mkdocs.yml --dev-addr=127.0.0.1:8001 &
 python manage.py tailwind start &
 python manage.py runserver &
 
