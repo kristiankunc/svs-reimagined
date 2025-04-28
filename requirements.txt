@@ -6,3 +6,5 @@ ruff
 djlint
 pre-commit
 mkdocs-material
+gunicorn
+whitenoise

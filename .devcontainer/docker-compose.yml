@@ -1,0 +1,19 @@
+services:
+  svs:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: svs
+    restart: "no"
+    ports:
+      - 8096:8096
+    environment:
+      - ALLOWED_HOSTS=localhost,127.0.0.1
+    env_file:
+      - ../.env
+    volumes:
+      - svs-data:/app/database
+
+volumes:
+  svs-data:
+    external: true
