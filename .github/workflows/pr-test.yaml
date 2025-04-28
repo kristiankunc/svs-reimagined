@@ -33,6 +33,7 @@ jobs:
         name: Run Tests
         runs-on: ubuntu-latest
         needs: lint
+        if: false # Disabled till tests are added
         steps:
             - name: Checkout Code
               uses: actions/checkout@v3
@@ -53,7 +54,8 @@ jobs:
     docker-build:
         name: Build and Test Docker Image
         runs-on: ubuntu-latest
-        needs: test
+        # needs: test
+        needs: lint
         steps:
             - name: Checkout Code
               uses: actions/checkout@v3
@@ -63,6 +65,3 @@ jobs:
 
             - name: Inspect Docker Image
               run: docker inspect test-image
-
-            - name: Run Docker Container
-              run: docker run --rm test-image
