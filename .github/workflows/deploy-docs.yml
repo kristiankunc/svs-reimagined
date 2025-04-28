@@ -1,10 +1,11 @@
 name: ci
 on:
     push:
-        branches:
-            - main
+        paths:
+            - "docs/**"
 permissions:
     contents: write
+
 jobs:
     deploy:
         runs-on: ubuntu-latest
