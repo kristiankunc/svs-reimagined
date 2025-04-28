@@ -1,21 +1,10 @@
 services:
-    postgres:
-        image: postgres:latest
-        container_name: postgres
-        env_file:
-            - ../.env
-        ports:
-            - "${POSTGRES_PORT}:${POSTGRES_PORT}"
-        volumes:
-            - postgres_data:/var/lib/postgresql/data
-
-    adminer:
-        image: adminer:latest
-        container_name: adminer
-        environment:            
-            ADMINER_DEFAULT_SERVER: postgres
-        ports:
-            - "8080:8080"
-
-volumes:
-  postgres_data:
+  adminer:
+    image: ghcr.io/coleifer/sqlite-web:latest
+    container_name: sqlite-web
+    restart: "no"
+    ports:
+      - 8080:8080
+    volumes:
+      - ../db.sqlite3:/db/db.sqlite3
+    command: sqlite_web --host 0.0.0.0 /db/db.sqlite3
