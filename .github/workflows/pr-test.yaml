@@ -24,10 +24,10 @@ jobs:
                   pip install ruff djlint
 
             - name: Run Ruff
-              run: ruff .
+              run: ruff check .
 
             - name: Run DjLint
-              run: djlint . --check
+              run: djlint --check web/templates
 
     test:
         name: Run Tests
