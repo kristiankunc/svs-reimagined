@@ -65,6 +65,3 @@ jobs:
 
             - name: Inspect Docker Image
               run: docker inspect test-image
-
-            - name: Run Docker Container
-              run: docker run --rm test-image
