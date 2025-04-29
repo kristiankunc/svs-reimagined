@@ -3,4 +3,10 @@
     <h1 class="border-b pb-2 mb-4 text-2xl font-bold text-gray-800">Test Page</h1>
     <p class="text-gray-600 mt-4">This is the content block of the test.html template.</p>
     <div class="bg-red-500 text-white p-4 rounded">This is a red box.</div>
+    {% if user.is_authenticated %}
+        <p class="mt-4 text-green-600">Welcome, {{ user.first_name }} {{ user.last_name }}!</p>
+    {% else %}
+        <p class="mt-4 text-red-600">You are not logged in.</p>
+        <a href="{% url "social:begin" "google-oauth2" %}">Přihlásit se pomocí Google</a>
+    {% endif %}
 {% endblock content %}
