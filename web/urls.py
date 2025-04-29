@@ -6,4 +6,5 @@ from . import views
 urlpatterns = [
     path("oauth/", include("social_django.urls", namespace="social")),
     path("", views.index, name="index"),
+    path("logout/", views.logout, name="logout"),
 ]
