@@ -1,10 +1,12 @@
+import os
 from shutil import which
 from .env_loader import load_env
 from .base_dir import BASE_DIR as _BASE_DIR
 
 BASE_DIR = _BASE_DIR
 
-globals().update(load_env())
+if os.getenv("DOCKER_BUILDING") != "true":
+    globals().update(load_env())
 
 
 # Application definition
