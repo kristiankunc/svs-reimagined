@@ -3,6 +3,7 @@ import secrets
 from dotenv import load_dotenv
 from .base_dir import BASE_DIR
 
+# All required environment variables and their default values
 ENV_VARS = {
     "SOCIAL_AUTH_GOOGLE_OAUTH2_KEY": None,
     "SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET": None,
@@ -13,6 +14,8 @@ ENV_VARS = {
 
 
 def load_env() -> dict:
+
+    
     """
     Loads environment variables from a `.env` file and a `secret_key.txt` file,
     and ensures all required environment variables are set. If a secret key
