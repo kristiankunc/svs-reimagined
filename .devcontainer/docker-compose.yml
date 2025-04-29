@@ -12,7 +12,7 @@ services:
     env_file:
       - ../.env
     volumes:
-      - svs-data:/app/database
+      - svs-data:/app/data
 
 volumes:
   svs-data:

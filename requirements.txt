@@ -8,3 +8,4 @@ pre-commit
 mkdocs-material
 gunicorn
 whitenoise
+social-auth-app-django
