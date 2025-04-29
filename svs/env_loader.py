@@ -14,8 +14,6 @@ ENV_VARS = {
 
 
 def load_env() -> dict:
-
-    
     """
     Loads environment variables from a `.env` file and a `secret_key.txt` file,
     and ensures all required environment variables are set. If a secret key
