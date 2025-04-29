@@ -13,6 +13,22 @@ ENV_VARS = {
 
 
 def load_env() -> dict:
+    """
+    Loads environment variables from a `.env` file and a `secret_key.txt` file,
+    and ensures all required environment variables are set. If a secret key
+    does not exist, it generates a new one and saves it to `secret_key.txt`.
+    Returns:
+        dict: A dictionary containing the loaded environment variables and their values.
+    Raises:
+        ValueError: If a required environment variable is not set and has no default value.
+    Notes:
+        - The function checks for the existence of a `.env` file in the `BASE_DIR` directory
+          and loads its contents into the environment.
+        - If the `secret_key.txt` file does not exist, a new secret key is generated, saved
+          to the file, and added to the environment variables.
+        - The `ENV_VARS` dictionary is expected to define the required environment variables
+          and their default values.
+    """
     variables = {}
     if os.path.exists(os.path.join(BASE_DIR, ".env")):
         load_dotenv(os.path.join(BASE_DIR, ".env"))
