@@ -41,6 +41,10 @@ def load_env() -> dict:
     if os.path.exists(os.path.join(BASE_DIR, ".env")):
         load_dotenv(os.path.join(BASE_DIR, ".env"))
 
+    ci_env_path = os.path.join(BASE_DIR, ".env.ci")
+    if os.path.exists(ci_env_path):
+        load_dotenv(ci_env_path)
+
     secret_key_path = os.path.join(BASE_DIR, "data", "secret_key.txt")
 
     # Using already generated secret key, otherwise generating a new one

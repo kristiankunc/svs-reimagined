@@ -51,10 +51,6 @@ jobs:
               run: |
                   mkdir -p data
 
-            - name: Load .env.ci
-              run: |
-                  export $(cat .env.ci | xargs)
-
             - name: Run Tests
               run: python manage.py test web.tests
 
