@@ -10,3 +10,5 @@ gunicorn
 whitenoise
 social-auth-app-django
 tzlocal
+docker
+gitpython
