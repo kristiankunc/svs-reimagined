@@ -23,8 +23,3 @@ def make_first_user_superuser(backend, user=None, **kwargs):
         user.is_superuser = True
         user.is_staff = True
         user.save()
-
-
-def handle_social_auth_exception(request, exception):
-    messages.error(request, str(exception))
-    return redirect("/")
