@@ -9,3 +9,4 @@ mkdocs-material
 gunicorn
 whitenoise
 social-auth-app-django
+tzlocal

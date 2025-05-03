@@ -11,6 +11,12 @@
         {% tailwind_css %}
     </head>
     <body class="bg-gray-50 font-serif leading-normal tracking-normal">
+        {% if messages %}
+            <p>Messages</p>
+            <ul>
+                {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+            </ul>
+        {% endif %}
         {% block content %}
         {% endblock content %}
     </body>
