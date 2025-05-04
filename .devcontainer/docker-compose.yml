@@ -1,5 +1,7 @@
 services:
   svs:
+    depends_on:
+      - caddy
     build:
       context: ..
       dockerfile: Dockerfile
@@ -9,25 +11,26 @@ services:
       - 8096:8096
     environment:
       - ALLOWED_HOSTS=localhost,127.0.0.1
+    labels:
+      - "caddy=svs.gyarab.cz"
+      - "caddy.reverse_proxy={{upstreams 80}}"
     env_file:
       - ../.env
     volumes:
       - svs-data:/app/data
 
   caddy:
-    build:
-      context: ../caddy
-      dockerfile: Dockerfile
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
     container_name: caddy
     restart: "no"
+    environment:
+      - CADDY_INGRESS_NETWORKS=caddy
     ports:
       - 80:80
       - 443:443
     volumes:
-      - caddy_shared:/etc/caddy:ro
-      - caddy_shared:/srv:ro
-      - caddy_shared:/data:rw
-      - caddy_shared:/config:rw
+      - /var/run/docker.sock:/var/run/docker.sock
+      - caddy_shared:/data
 
 volumes:
   svs-data:
