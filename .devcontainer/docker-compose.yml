@@ -14,6 +14,21 @@ services:
     volumes:
       - svs-data:/app/data
 
+  caddy:
+    build:
+      context: ../caddy
+      dockerfile: Dockerfile
+    container_name: caddy
+    restart: "no"
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - caddy_shared:/etc/caddy:ro
+      - caddy_shared:/srv:ro
+      - caddy_shared:/data:rw
+      - caddy_shared:/config:rw
+
 volumes:
   svs-data:
-    external: true
+  caddy_shared:
