@@ -34,3 +34,8 @@ def create(request):
             return redirect("index")
 
     return render(request, "web/create.html", {"form": form})
+
+
+def project(request, project_id):
+    project = Project.objects.get(id=project_id)
+    return render(request, "web/project.html", {"project": project})

@@ -1,0 +1,25 @@
+{% extends "web/base.html" %}
+{% block content %}
+    <h1>Project Details</h1>
+    <p>
+        <strong>Name:</strong> {{ project.name }}
+    </p>
+    <p>
+        <strong>User:</strong> {{ project.user.username }}
+    </p>
+    <p>
+        <strong>Created At:</strong> {{ project.created_at }}
+    </p>
+    <p>
+        <strong>Git URL:</strong> <a href="{{ project.git_url }}">{{ project.git_url }}</a>
+    </p>
+    <p>
+        <strong>Git Branch:</strong> {{ project.git_branch }}
+    </p>
+    <p>
+        <strong>Template:</strong> {{ project.template }}
+    </p>
+    <p>
+        <strong>Port:</strong> {{ project.port }}
+    </p>
+{% endblock content %}

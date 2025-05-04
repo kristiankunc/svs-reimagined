@@ -38,7 +38,7 @@ class Project(models.Model):
             return random.choice(list(available_ports))
         raise ValueError("No available ports in the safe range.")
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     user = models.ForeignKey("auth.User", on_delete=models.CASCADE, related_name="projects")
     created_at = models.DateTimeField(auto_now_add=True)
 

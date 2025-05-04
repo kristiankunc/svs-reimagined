@@ -1,10 +1,13 @@
 import tempfile
 import threading
 from git import Repo
-from ...models import Project
 from docker import errors as docker_errors
 import docker
+import shutil
 import time
+
+from ...models import Project
+from .dockerfile_templates.template_manager import Template
 
 
 def poc_create_static(project_id: int):
@@ -19,32 +22,20 @@ def run_static_project_creation(project):
     try:
         Repo.clone_from(project.git_url, temp_dir, branch=project.git_branch)
 
-        dockerfile_content = f"""
-    FROM nginx:alpine
-    COPY . /usr/share/nginx/html
-    EXPOSE {project.port}
-    CMD ["nginx", "-g", "daemon off;"]
-    """
+        template = Template.get(Template.TemplateType.STATIC)
+        dockerfile_content = template.dockerfile_content.replace("{{port}}", project.port)
         with open(f"{temp_dir}/Dockerfile", "w") as dockerfile:
             dockerfile.write(dockerfile_content)
 
-        dockerignore_content = """
-    .git
-    .gitignore
-    Dockerfile
-    .dockerignore
-    """
-
         with open(f"{temp_dir}/.dockerignore", "w") as dockerignore:
-            dockerignore.write(dockerignore_content)
+            dockerignore.write(template.dockerignore_content)
 
         docker_client = docker.from_env()
 
         timestamp = int(time.time())
-        unique_tag = f"{project.user.username}_{project.name}_{timestamp}"
+        unique_tag = f"{project.name}_{timestamp}"
 
         try:
-            # Build the Docker image
             image = docker_client.images.build(
                 path=temp_dir, tag=unique_tag, rm=True, container_limits={"memory": 256 * 1024 * 1024}
             )[0]
@@ -59,7 +50,8 @@ def run_static_project_creation(project):
                 image=image,
                 ports={"80/tcp": ("127.0.0.1", project.port)},
                 detach=True,
-                name=project.user.username + "_" + project.name,
+                labels={"caddy": f"{project.name}.svs.gyarab.cz", "caddy.reverse_proxy": "{{upstreams 80}}"},
+                name=project.name,
             )
             print(f"Container {container.name} started successfully.")
         except docker_errors.APIError as e:
@@ -68,8 +60,5 @@ def run_static_project_creation(project):
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
-        # Clean up the temporary directory after all operations are complete
-        import shutil
-
         shutil.rmtree(temp_dir, ignore_errors=True)
         print(f"Temporary directory {temp_dir} cleaned up.")
