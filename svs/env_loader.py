@@ -11,6 +11,7 @@ ENV_VARS = {
     "DEBUG": False,
     "ALLOWED_HOSTS": ["localhost", "127.0.0.1"],
     "DOCKER_HOST": "unix:///var/run/docker.sock",
+    "DOMAIN": None,
 }
 
 

@@ -1,3 +1,4 @@
+import os
 import tempfile
 import threading
 from git import Repo
@@ -50,7 +51,7 @@ def run_static_project_creation(project):
                 image=image,
                 ports={"80/tcp": ("127.0.0.1", project.port)},
                 detach=True,
-                labels={"caddy": f"{project.name}.svs.gyarab.cz", "caddy.reverse_proxy": "{{upstreams 80}}"},
+                labels={"caddy": f"{project.name}.{os.getenv('DOMAIN')}", "caddy.reverse_proxy": "{{upstreams 80}}"},
                 name=project.id,
             )
             print(f"Container {container.name} started successfully.")
