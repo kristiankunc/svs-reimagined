@@ -1,0 +1,7 @@
+# dockerfile-utils: ignore
+FROM nginx:alpine
+
+COPY . /usr/share/nginx/html
+EXPOSE {{port}}
+
+CMD ["nginx", "-g", "daemon off;"]

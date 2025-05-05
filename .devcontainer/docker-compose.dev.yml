@@ -8,3 +8,23 @@ services:
     volumes:
       - ../data/db.sqlite3:/db/db.sqlite3
     command: sqlite_web --host 0.0.0.0 /db/db.sqlite3
+
+
+#  caddy:
+#    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+#    container_name: caddy
+#    restart: "no"
+#    environment:
+#      - CADDY_INGRESS_NETWORKS=caddy
+#    ports:
+#      - 80:80
+#      - 443:443
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - caddy_shared:/data
+
+networks:
+  caddy:
+
+volumes:
+  caddy_shared:

@@ -93,3 +93,7 @@ database
 *.sqlite3
 *.sqlite
 .devcontainer
+
+docs/
+.pre-commit-config.yaml
+caddy/

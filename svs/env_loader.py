@@ -10,6 +10,7 @@ ENV_VARS = {
     "SECRET_KEY": None,
     "DEBUG": False,
     "ALLOWED_HOSTS": ["localhost", "127.0.0.1"],
+    "DOCKER_HOST": "unix:///var/run/docker.sock",
 }
 
 

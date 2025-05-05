@@ -1,4 +1,4 @@
-FROM python:3-slim-bookworm
+FROM python:3.12-slim-bookworm
 
 ARG DOCKER_BUILDING=true
 
@@ -9,13 +9,13 @@ WORKDIR /app
 
 COPY . /app/
 
-RUN apt-get update && apt-get install -y --no-install-recommends curl && \
+# Install dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends curl git && \
     curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
     apt-get install -y --no-install-recommends nodejs && \
     pip install --no-cache-dir -r requirements.txt && \
     python manage.py tailwind install && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
-
 
 ENV PORT=8096
 EXPOSE ${PORT}
