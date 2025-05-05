@@ -23,9 +23,9 @@ def run_static_project_creation(project):
         Repo.clone_from(project.git_url, temp_dir, branch=project.git_branch)
 
         template = Template.get(Template.TemplateType.STATIC)
-        dockerfile_content = template.dockerfile_content.replace("{{port}}", str(project.port))
+        template.apply_variables({"port": project.port})
         with open(f"{temp_dir}/Dockerfile", "w") as dockerfile:
-            dockerfile.write(dockerfile_content)
+            dockerfile.write(template.dockerfile_content)
 
         with open(f"{temp_dir}/.dockerignore", "w") as dockerignore:
             dockerignore.write(template.dockerignore_content)
