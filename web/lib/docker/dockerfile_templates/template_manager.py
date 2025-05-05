@@ -9,9 +9,19 @@ class Template:
         def exists(cls, value: str) -> bool:
             return value in cls.__dict__.values()
 
-    template_type: TemplateType
-    dockerfile_content: str
-    dockerignore_content: str
+    def __init__(self, template_type: TemplateType, dockerfile_content: str, dockerignore_content: str):
+        self.template_type = template_type
+        self.dockerfile_content = dockerfile_content
+        self.dockerignore_content = dockerignore_content
+
+    # TODO: maybe use something better than {{key}}
+    def apply_variables(self, variables: dict) -> bool:
+        for key, value in variables.items():
+            self.dockerfile_content = self.dockerfile_content.replace(f"{{{key}}}", str(value))
+            self.dockerignore_content = self.dockerignore_content.replace(f"{{{key}}}", str(value))
+
+        if "{{" in self.dockerfile_content or "{{" in self.dockerignore_content:
+            raise ValueError("Not all variables were replaced in the template.")
 
     @staticmethod
     def get(type: TemplateType) -> "Template":

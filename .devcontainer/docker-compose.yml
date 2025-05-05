@@ -12,7 +12,7 @@ services:
     environment:
       - ALLOWED_HOSTS=localhost,127.0.0.1
     labels:
-      - "caddy=svs.gyarab.cz"
+      - "caddy=svs.gyarab.cz" # Replace with env DOMAIN
       - "caddy.reverse_proxy={{upstreams 80}}"
     env_file:
       - ../.env

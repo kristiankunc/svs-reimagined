@@ -1,8 +1,8 @@
 import tzlocal
 import os
 from shutil import which
-from .env_loader import load_env
-from .base_dir import BASE_DIR as _BASE_DIR
+from svs.env_loader import load_env
+from svs.base_dir import BASE_DIR as _BASE_DIR
 
 BASE_DIR = _BASE_DIR
 
