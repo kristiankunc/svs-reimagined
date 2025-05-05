@@ -96,4 +96,4 @@ database
 
 docs/
 .pre-commit-config.yaml
-caddy/
+data/
