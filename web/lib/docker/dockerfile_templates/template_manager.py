@@ -9,9 +9,10 @@ class Template:
         def exists(cls, value: str) -> bool:
             return value in cls.__dict__.values()
 
-    template_type: TemplateType
-    dockerfile_content: str
-    dockerignore_content: str
+    def __init__(self, template_type: TemplateType, dockerfile_content: str, dockerignore_content: str):
+        self.template_type = template_type
+        self.dockerfile_content = dockerfile_content
+        self.dockerignore_content = dockerignore_content
 
     @staticmethod
     def get(type: TemplateType) -> "Template":

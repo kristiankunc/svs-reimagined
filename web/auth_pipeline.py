@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from django.contrib import messages
-from .models import InvitedUser
+from web.models import InvitedUser
 
 
 def is_user_registered(email: str) -> bool:

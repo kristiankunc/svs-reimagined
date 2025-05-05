@@ -23,7 +23,7 @@ def run_static_project_creation(project):
         Repo.clone_from(project.git_url, temp_dir, branch=project.git_branch)
 
         template = Template.get(Template.TemplateType.STATIC)
-        dockerfile_content = template.dockerfile_content.replace("{{port}}", project.port)
+        dockerfile_content = template.dockerfile_content.replace("{{port}}", str(project.port))
         with open(f"{temp_dir}/Dockerfile", "w") as dockerfile:
             dockerfile.write(dockerfile_content)
 
@@ -33,7 +33,7 @@ def run_static_project_creation(project):
         docker_client = docker.from_env()
 
         timestamp = int(time.time())
-        unique_tag = f"{project.name}_{timestamp}"
+        unique_tag = f"{project.id}_{timestamp}"
 
         try:
             image = docker_client.images.build(
@@ -51,7 +51,7 @@ def run_static_project_creation(project):
                 ports={"80/tcp": ("127.0.0.1", project.port)},
                 detach=True,
                 labels={"caddy": f"{project.name}.svs.gyarab.cz", "caddy.reverse_proxy": "{{upstreams 80}}"},
-                name=project.name,
+                name=project.id,
             )
             print(f"Container {container.name} started successfully.")
         except docker_errors.APIError as e:
@@ -62,3 +62,18 @@ def run_static_project_creation(project):
     finally:
         shutil.rmtree(temp_dir, ignore_errors=True)
         print(f"Temporary directory {temp_dir} cleaned up.")
+
+
+def poc_delete_static(project_id: int):
+    project = Project.objects.get(id=project_id)
+
+    try:
+        docker_client = docker.from_env()
+        container = docker_client.containers.get(str(project.id))
+        container.stop()
+        container.remove(force=True)
+        print(f"Container {container.name} stopped and removed successfully.")
+    except docker_errors.NotFound:
+        print(f"Container {project.id} not found.")
+    except Exception as e:
+        print(f"An error occurred while stopping/removing the container: {e}")

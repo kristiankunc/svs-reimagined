@@ -1,5 +1,5 @@
 from django import forms
-from .models import TemplateChoices
+from web.models import TemplateChoices
 
 
 class ProjectForm(forms.Form):

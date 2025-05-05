@@ -4,7 +4,11 @@ from django.contrib.auth import logout as auth_logout
 
 
 def index(request):
-    return render(request, "web/test.html")
+    projects = []
+    if request.user.is_authenticated:
+        projects = request.user.projects.all()
+
+    return render(request, "web/test.html", {"projects": projects})
 
 
 def logout(request):

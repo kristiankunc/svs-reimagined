@@ -22,4 +22,16 @@
     <p>
         <strong>Port:</strong> {{ project.port }}
     </p>
+    <form method="post" action="{% url 'delete_project' project.id %}">
+        {% csrf_token %}
+        <button type="submit"
+                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete Project</button>
+    </form>
+    <div class="max-h-52 overflow-y-scroll">
+        {% for entry in logs|slice:":10" %}
+            <p>
+                <span class="text-gray-500">{{ entry.timestamp }}</span> {{ entry.message }}
+            </p>
+        {% endfor %}
+    </div>
 {% endblock content %}
