@@ -1,10 +1,6 @@
-from django.urls import path
+from .views.project import urlpatterns as project_urls
+from .views.root import urlpatterns as root_urls
 
-from . import views
-
-urlpatterns = [
-    path("", views.index, name="index"),
-    path("logout/", views.logout, name="logout"),
-    path("create/", views.create, name="create"),
-    path("project/<int:project_id>/", views.project, name="project"),
-]
+urlpatterns = []
+urlpatterns += root_urls
+urlpatterns += project_urls
