@@ -4,7 +4,7 @@
 		"dockerfile": "Dockerfile",
 		"context": ".."
 	},
-	"workspaceMount": "source=${localWorkspaceFolder},target=/home/dev/app,type=bind",
+	"workspaceMount": "source=${localWorkspaceFolder}/..,target=/home/dev/app,type=bind",
 	"workspaceFolder": "/home/dev/app",
 	"remoteUser": "dev"
 }

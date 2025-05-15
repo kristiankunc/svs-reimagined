@@ -1,0 +1,10 @@
+site_name: My Python Project
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings
+
+nav:
+  - Home: index.md
