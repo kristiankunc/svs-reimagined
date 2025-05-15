@@ -1,6 +1,1 @@
-{
-	"settings": {
-		"python.defaultInterpreterPath": "/home/dev/.venv/bin/python"
-	},
-	"extensions": ["ms-python.python", "ms-python.vscode-pylance"]
-}
+{}
