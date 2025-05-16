@@ -4,7 +4,20 @@
 		"dockerfile": "Dockerfile",
 		"context": ".."
 	},
-	"workspaceMount": "source=${localWorkspaceFolder}/..,target=/home/dev/app,type=bind",
+	"customizations": {
+		"vscode": {
+			"extensions": ["tamasfe.even-better-toml", "ms-python.python", "ms-python.vscode-pylance", "charliermarsh.ruff"],
+			"settings": {
+				"python.analysis.autoSearchPaths": true,
+				"python.analysis.useLibraryCodeForTypes": true,
+				"python.linting.enabled": true,
+				"python.linting.ruffEnabled": true,
+				"python.linting.ruffPath": "ruff",
+				"python.formatting.provider": "autopep8"
+			}
+		}
+	},
+	"postCreateCommand": "pip install -r requirements.txt",
 	"workspaceFolder": "/home/dev/app",
 	"remoteUser": "dev"
 }

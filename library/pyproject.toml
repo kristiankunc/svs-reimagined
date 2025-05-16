@@ -13,3 +13,9 @@ packages = ["svs_core"]
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "C90", "I"]
+ignore = ["E203", "W503"]
+fix = true

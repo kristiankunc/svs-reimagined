@@ -23,7 +23,8 @@ ENV PATH="/home/$USERNAME/.venv/bin:$PATH"
 # Copy only requirements.txt first for caching
 COPY --chown=dev:dev requirements.txt ./requirements.txt
 
-RUN pip install --upgrade pip && pip install -r requirements.txt || true
-
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+    
 # Copy the rest of the library source code
 COPY --chown=dev:dev . .
